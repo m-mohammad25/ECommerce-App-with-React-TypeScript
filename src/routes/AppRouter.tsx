@@ -8,11 +8,15 @@ import Home from "@pages/Home";
 import Products from "@pages/Products";
 import Categories from "@pages/Categories";
 import AboutUs from "@pages/AboutUs";
+import Login from "@pages/Login";
+import Register from "@pages/Register";
+import Error from "@pages/Error/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <Error />,
     children: [
       {
         index: true,
@@ -21,6 +25,18 @@ const router = createBrowserRouter([
       {
         path: "products/:prefix",
         element: <Products />,
+        loader: ({ params }) => {
+          if (
+            typeof params.prefix !== "string" ||
+            !/^[a-z]+$/i.test(params.prefix)
+          ) {
+            throw new Response("Bad Request", {
+              status: 400,
+              statusText: "Category not found",
+            });
+          }
+          return true;
+        },
       },
       {
         path: "categories",
@@ -29,6 +45,14 @@ const router = createBrowserRouter([
       {
         path: "about-us",
         element: <AboutUs />,
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "register",
+        element: <Register />,
       },
     ],
   },

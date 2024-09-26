@@ -1,4 +1,5 @@
 import { Badge, Container, Nav, Navbar } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 import styles from "./styles.module.css";
 import { HeaderBasket } from "../../eCommerce";
 const { headerContainer, headerLogo } = styles;
@@ -21,13 +22,24 @@ function Header() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#">Home</Nav.Link>
-              <Nav.Link href="#">Categories</Nav.Link>
-              <Nav.Link href="#">About</Nav.Link>
+              <Nav.Link as={NavLink} to="/">
+                {/* render this component as a NavLink */}
+                Home
+              </Nav.Link>
+              <Nav.Link as={NavLink} to="categories">
+                Categories
+              </Nav.Link>
+              <Nav.Link as={NavLink} to="about-us">
+                About
+              </Nav.Link>
             </Nav>
             <Nav>
-              <Nav.Link href="#">Login</Nav.Link>
-              <Nav.Link href="#">Register</Nav.Link>
+              <Nav.Link as={NavLink} to="login">
+                Login
+              </Nav.Link>
+              <Nav.Link as={NavLink} to="register">
+                Register
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
