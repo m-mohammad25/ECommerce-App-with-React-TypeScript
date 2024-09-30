@@ -1,8 +1,8 @@
-import { Container, Row, Col } from "react-bootstrap";
-import { Category } from "@components/eCommerce";
+import { useEffect } from "react";
 import { actGetCategories } from "@store/categories/categoriesSlice";
 import { useAppDispatch, useAppSelector } from "@store/hooks";
-import { useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import { Category } from "@components/eCommerce";
 
 const Categories = () => {
   const dispatch = useAppDispatch();
