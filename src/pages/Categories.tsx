@@ -13,34 +13,20 @@ const Categories = () => {
     dispatch(actGetCategories());
   }, []);
 
+  const categoriesList = records.map((record) => (
+    <Col
+      xs={6}
+      md={3}
+      className="d-flex justify-content-center mb-5 mt-2"
+      key={record.id}
+    >
+      <Category {...record} />
+    </Col>
+  ));
+
   return (
     <Container>
-      <Row>
-        <Col xs={6} md={3} className="d-flex justify-content-center mb-5 mt-2">
-          <Category />
-        </Col>
-        <Col xs={6} md={3} className="d-flex justify-content-center mb-5 mt-2">
-          <Category />
-        </Col>
-        <Col xs={6} md={3} className="d-flex justify-content-center mb-5 mt-2">
-          <Category />
-        </Col>
-        <Col xs={6} md={3} className="d-flex justify-content-center mb-5 mt-2">
-          <Category />
-        </Col>
-        <Col xs={6} md={3} className="d-flex justify-content-center mb-5 mt-2">
-          <Category />
-        </Col>
-        <Col xs={6} md={3} className="d-flex justify-content-center mb-5 mt-2">
-          <Category />
-        </Col>
-        <Col xs={6} md={3} className="d-flex justify-content-center mb-5 mt-2">
-          <Category />
-        </Col>
-        <Col xs={6} md={3} className="d-flex justify-content-center mb-5 mt-2">
-          <Category />
-        </Col>
-      </Row>
+      <Row>{categoriesList}</Row>
     </Container>
   );
 };
