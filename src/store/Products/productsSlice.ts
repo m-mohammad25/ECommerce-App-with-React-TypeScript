@@ -3,13 +3,13 @@ import actGetCatProdcuts from "./act/actGetCatProdcuts";
 import { TLoading } from "@customTypes/shared";
 import { TProduct } from "@customTypes/product";
 
-interface ICategoryState {
+interface IProductState {
   records: TProduct[]; //array of that object
   loading: TLoading;
   error: string | null;
 }
 
-const initialState: ICategoryState = {
+const initialState: IProductState = {
   records: [],
   loading: "idle",
   error: null,
@@ -18,7 +18,11 @@ const initialState: ICategoryState = {
 const productsSlice = createSlice({
   name: "categories",
   initialState,
-  reducers: {},
+  reducers: {
+    productsCleanUp: (state) => {
+      state.records = [];
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(actGetCatProdcuts.pending, (state) => {
       state.loading = "pending";
@@ -37,4 +41,5 @@ const productsSlice = createSlice({
 });
 
 export default productsSlice.reducer;
+export const { productsCleanUp } = productsSlice.actions;
 export { actGetCatProdcuts };

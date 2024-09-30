@@ -10,7 +10,10 @@ const Categories = () => {
     (state) => state.categories
   );
   useEffect(() => {
-    dispatch(actGetCategories());
+    if (!records.length) {
+      //if categories state is empty, fetch all records
+      dispatch(actGetCategories());
+    }
   }, []);
 
   const categoriesList = records.map((record) => (

@@ -2,7 +2,10 @@ import { Container, Row, Col } from "react-bootstrap";
 import { Product } from "@components/eCommerce";
 import { useAppDispatch, useAppSelector } from "@store/hooks";
 import { useEffect } from "react";
-import { actGetCatProdcuts } from "@store/Products/productsSlice";
+import {
+  actGetCatProdcuts,
+  productsCleanUp,
+} from "@store/Products/productsSlice";
 import { useParams } from "react-router-dom";
 
 const Products = () => {
@@ -11,6 +14,10 @@ const Products = () => {
   const { records, loading, error } = useAppSelector((state) => state.products);
   useEffect(() => {
     dispatch(actGetCatProdcuts(prefix as string));
+
+    return () => {
+      dispatch(productsCleanUp());
+    };
   }, [dispatch, prefix]);
 
   const productsList = records.map((record) => (
