@@ -1,2 +1,2 @@
-import Loading from "./loading/loading";
+import Loading from "./Loading/Loading";
 export { Loading };
