@@ -5,18 +5,20 @@ import categories from "@store/categories/categoriesSlice";
 import products from "@store/Products/productsSlice";
 import cart from "@store/Cart/cartSlice";
 
-const persistConfig = {
+const cartPersistConfig = {
   key: "root", //id for this configs
   storage,
-  whiteList: ["cart"], //presist this state
+  whiteList: ["items"], //presist this state
 };
 
-const rootReducer = combineReducers({ categories, products, cart });
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const rootReducer = combineReducers({
+  categories,
+  products,
+  cart: persistReducer(cartPersistConfig, cart),
+});
 
 const store = configureStore({
-  reducer: persistedReducer,
+  reducer: rootReducer,
 });
 
 const persistor = persistStore(store);
