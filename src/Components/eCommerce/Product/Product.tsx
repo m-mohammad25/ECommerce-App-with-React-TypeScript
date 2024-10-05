@@ -1,15 +1,34 @@
-import { useAppDispatch } from "@store/hooks";
+import { memo, useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "@store/hooks";
 import { addToCart } from "@store/Cart/cartSlice";
 import { TProduct } from "@customTypes/product";
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
+
 import styles from "./style.module.css";
 
 const { product, productImg } = styles;
 
-const Product = ({ id, title, img, price }: TProduct) => {
+const Product = memo(({ id, title, img, price, max, quantity }: TProduct) => {
   const dispatch = useAppDispatch();
+
+  const availableQuantity = max - (quantity ?? 0);
+  console.log("availableQuantity", availableQuantity);
+  const isMaxQuantityReached = availableQuantity == 0;
+
+  const [isBtnClicked, setIsBtnClicked] = useState(0);
+  const [isBtnDisabled, setIsBtnDisabled] = useState(false);
+
+  useEffect(() => {
+    if (!isBtnClicked) return;
+    setIsBtnDisabled(true);
+    const debounce = setTimeout(() => {
+      setIsBtnDisabled(false);
+    }, 300);
+    return () => clearTimeout(debounce);
+  }, [isBtnClicked]);
   const addToCartHandler = () => {
     dispatch(addToCart(id));
+    setIsBtnClicked((prev) => prev + 1);
   };
   return (
     <div className={product}>
@@ -18,15 +37,27 @@ const Product = ({ id, title, img, price }: TProduct) => {
       </div>
       <h2>{title}</h2>
       <h3>{price} EGP</h3>
+      <p>
+        {!isMaxQuantityReached
+          ? `You can buy ${availableQuantity} "item(s)`
+          : "Max quantity reached"}
+      </p>
       <Button
         variant="info"
         style={{ color: "white" }}
         onClick={addToCartHandler}
+        disabled={isBtnDisabled || isMaxQuantityReached}
       >
-        Add to cart
+        {isBtnDisabled ? (
+          <>
+            <Spinner animation="border" size="sm" /> Loading...{" "}
+          </>
+        ) : (
+          "Add to cart"
+        )}
       </Button>
     </div>
   );
-};
+});
 
 export default Product;
