@@ -1,4 +1,4 @@
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
-
-export { Header, Footer };
+import Heading from "./Heading/Heading";
+export { Header, Heading, Footer };

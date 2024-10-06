@@ -6,7 +6,7 @@ import { Button, Spinner } from "react-bootstrap";
 
 import styles from "./style.module.css";
 
-const { product, productImg } = styles;
+const { product, productImg, maximumNotice } = styles;
 
 const Product = memo(({ id, title, img, price, max, quantity }: TProduct) => {
   const dispatch = useAppDispatch();
@@ -37,9 +37,9 @@ const Product = memo(({ id, title, img, price, max, quantity }: TProduct) => {
       </div>
       <h2>{title}</h2>
       <h3>{price} EGP</h3>
-      <p>
+      <p className={maximumNotice}>
         {!isMaxQuantityReached
-          ? `You can buy ${availableQuantity} "item(s)`
+          ? `You can buy ${availableQuantity} item(s)`
           : "Max quantity reached"}
       </p>
       <Button

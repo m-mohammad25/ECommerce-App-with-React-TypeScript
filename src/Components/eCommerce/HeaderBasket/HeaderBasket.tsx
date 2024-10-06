@@ -3,7 +3,8 @@ import { useAppSelector } from "@store/hooks";
 import Logo from "../../../assets/cart.svg?react";
 import styles from "./styles.module.css";
 import { useEffect, useState } from "react";
-const { basketContainer, basketQuantity, pumpCartQuantity } = styles;
+const { basketContainer, basketQuantity, pumpCartQuantity, basketCart } =
+  styles;
 
 function HeaderBasket() {
   const totalQuantity = useAppSelector(getCartTotalQuantitySelector);
@@ -23,8 +24,11 @@ function HeaderBasket() {
 
   return (
     <div className={basketContainer}>
-      <Logo title="basket icon" />
-      <div className={quantityStyle}>{totalQuantity}</div>
+      <div className={basketCart}>
+        <Logo title="basket icon" />
+        <div className={quantityStyle}>{totalQuantity}</div>
+      </div>
+      <h3>Cart</h3>
     </div>
   );
 }
