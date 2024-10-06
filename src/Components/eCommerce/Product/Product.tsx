@@ -12,7 +12,6 @@ const Product = memo(({ id, title, img, price, max, quantity }: TProduct) => {
   const dispatch = useAppDispatch();
 
   const availableQuantity = max - (quantity ?? 0);
-  console.log("availableQuantity", availableQuantity);
   const isMaxQuantityReached = availableQuantity == 0;
 
   const [isBtnClicked, setIsBtnClicked] = useState(0);
@@ -36,7 +35,7 @@ const Product = memo(({ id, title, img, price, max, quantity }: TProduct) => {
         <img src={img} alt={title} />
       </div>
       <h2>{title}</h2>
-      <h3>{price} EGP</h3>
+      <h3>{price.toFixed(2)} $</h3>
       <p className={maximumNotice}>
         {!isMaxQuantityReached
           ? `You can buy ${availableQuantity} item(s)`
