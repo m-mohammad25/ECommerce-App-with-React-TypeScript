@@ -1,15 +1,21 @@
-import { TProduct } from "@customTypes/product";
 import { createSlice } from "@reduxjs/toolkit";
 import { getCartTotalQuantitySelector } from "@store/Cart/selectors";
+import actGetCatProdcutsByItems from "@store/Cart/act/getProductsByItems";
+import { TProduct } from "@customTypes/product";
+import { TLoading } from "@customTypes/shared";
 
 interface ICartState {
-  items: { [key: number]: number };
-  productFullInfo: TProduct[];
+  items: { [key: string]: number };
+  productsFullInfo: TProduct[];
+  loading: TLoading;
+  error: string | null;
 }
 
 const initialState: ICartState = {
   items: {},
-  productFullInfo: [],
+  productsFullInfo: [],
+  loading: "idle",
+  error: null,
 };
 
 const cartSlice = createSlice({
@@ -26,8 +32,23 @@ const cartSlice = createSlice({
       }
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(actGetCatProdcutsByItems.pending, (state) => {
+      state.loading = "pending";
+      state.error = null;
+    });
+    builder.addCase(actGetCatProdcutsByItems.fulfilled, (state, action) => {
+      state.loading = "succeeded";
+      state.error = null;
+      state.productsFullInfo = action.payload;
+    });
+    builder.addCase(actGetCatProdcutsByItems.rejected, (state, action) => {
+      state.loading = "failed";
+      state.error = action.payload as string;
+    });
+  },
 });
 
-export { getCartTotalQuantitySelector };
+export { getCartTotalQuantitySelector, actGetCatProdcutsByItems };
 export const { addToCart } = cartSlice.actions;
 export default cartSlice.reducer;

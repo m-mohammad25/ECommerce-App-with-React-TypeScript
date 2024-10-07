@@ -9,6 +9,7 @@ import { Container } from "react-bootstrap";
 import { Product } from "@components/eCommerce";
 import { Loading } from "@components/feedback";
 import GridList from "@components/Common/GridList/GridList";
+import { Heading } from "@components/Common";
 
 const Products = () => {
   const { prefix } = useParams();
@@ -30,6 +31,7 @@ const Products = () => {
 
   return (
     <Container>
+      <Heading>{prefix?.toLocaleUpperCase()} Products</Heading>
       <Loading status={loading} error={error}>
         <>
           {
