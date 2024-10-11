@@ -3,7 +3,7 @@ import { useCallback, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@store/hooks";
 import { actGetCatProdcutsByItems } from "@store/Cart/cartSlice";
 import { CartSubtotal, CartItemList } from "@components/eCommerce";
-import { cartItemChangeQuantity } from "@store/Cart/cartSlice";
+import { cartItemChangeQuantity, cartRemoveItem } from "@store/Cart/cartSlice";
 
 import { Heading } from "@components/Common";
 import { Loading } from "@components/feedback";
@@ -16,6 +16,10 @@ function Cart() {
     },
     [dispatch]
   );
+
+  const removeCartItem = (id: number) => {
+    dispatch(cartRemoveItem(id));
+  };
 
   const { items, loading, error, productsFullInfo } = useAppSelector(
     (state) => state.cart
@@ -37,6 +41,7 @@ function Cart() {
         <CartItemList
           products={products}
           changeQuantityHandler={changeQuantityHandler}
+          removeCartItem={removeCartItem}
         />
         <CartSubtotal />
       </Loading>
