@@ -2,7 +2,7 @@ import HeaderBasket from "./HeaderBasket/HeaderBasket";
 import Product from "./Product/Product";
 import Category from "./Category/Category";
 import CartItem from "./CartItem/CartItem";
-import CartSubtotal from "./CartSubtotal/CartSubtotal";
+import CartTotalPrice from "./CartTotalPrice/CartTotalPrice";
 import CartItemList from "./CartItemList/CartItemsList";
 
 export {
@@ -10,6 +10,6 @@ export {
   Product,
   Category,
   CartItem,
-  CartSubtotal,
+  CartTotalPrice,
   CartItemList,
 };

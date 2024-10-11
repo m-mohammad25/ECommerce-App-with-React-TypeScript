@@ -2,7 +2,7 @@ import { useCallback, useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "@store/hooks";
 import { actGetCatProdcutsByItems } from "@store/Cart/cartSlice";
-import { CartSubtotal, CartItemList } from "@components/eCommerce";
+import { CartTotalPrice, CartItemList } from "@components/eCommerce";
 import { cartItemChangeQuantity, cartRemoveItem } from "@store/Cart/cartSlice";
 
 import { Heading } from "@components/Common";
@@ -17,9 +17,12 @@ function Cart() {
     [dispatch]
   );
 
-  const removeCartItem = (id: number) => {
-    dispatch(cartRemoveItem(id));
-  };
+  const removeCartItem = useCallback(
+    (id: number) => {
+      dispatch(cartRemoveItem(id));
+    },
+    [dispatch]
+  );
 
   const { items, loading, error, productsFullInfo } = useAppSelector(
     (state) => state.cart
@@ -38,12 +41,18 @@ function Cart() {
     <>
       <Heading>Cart</Heading>
       <Loading status={loading} error={error}>
-        <CartItemList
-          products={products}
-          changeQuantityHandler={changeQuantityHandler}
-          removeCartItem={removeCartItem}
-        />
-        <CartSubtotal />
+        {products.length ? (
+          <>
+            <CartItemList
+              products={products}
+              changeQuantityHandler={changeQuantityHandler}
+              removeCartItem={removeCartItem}
+            />
+            <CartTotalPrice products={products} />
+          </>
+        ) : (
+          "Your Cart Is Empty!"
+        )}
       </Loading>
     </>
   );
