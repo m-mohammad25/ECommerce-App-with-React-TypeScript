@@ -6,4 +6,5 @@ export interface TProduct {
   price: number;
   max: number;
   quantity?: number;
+  isLiked?: boolean;
 }
