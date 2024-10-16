@@ -16,7 +16,13 @@ import cart from "@store/Cart/cartSlice";
 import wishlist from "@store/wishlist/wishlistSlice";
 
 const cartPersistConfig = {
-  key: "root", //id for this configs
+  key: "cart", //id for this configs
+  storage,
+  whiteList: ["items"], //presist this state
+};
+
+const wishlistPersistConfig = {
+  key: "wishlist", //id for this configs
   storage,
   whiteList: ["items"], //presist this state
 };
@@ -25,7 +31,7 @@ const rootReducer = combineReducers({
   categories,
   products,
   cart: persistReducer(cartPersistConfig, cart),
-  wishlist,
+  wishlist: persistReducer(wishlistPersistConfig, wishlist),
 });
 
 const store = configureStore({

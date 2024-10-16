@@ -1,7 +1,10 @@
 import { useCallback, useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "@store/hooks";
-import { actGetCatProdcutsByItems } from "@store/Cart/cartSlice";
+import {
+  actGetCatProdcutsByItems,
+  productsFullInfoCleanup,
+} from "@store/Cart/cartSlice";
 import { CartTotalPrice, CartItemList } from "@components/eCommerce";
 import { cartItemChangeQuantity, cartRemoveItem } from "@store/Cart/cartSlice";
 
@@ -35,6 +38,9 @@ function Cart() {
 
   useEffect(() => {
     dispatch(actGetCatProdcutsByItems());
+    return () => {
+      dispatch(productsFullInfoCleanup());
+    };
   }, [dispatch]);
 
   return (

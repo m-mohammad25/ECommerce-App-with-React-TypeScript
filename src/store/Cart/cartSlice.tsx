@@ -22,6 +22,9 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    productsFullInfoCleanup: (state) => {
+      state.productsFullInfo = [];
+    },
     addToCart: (state, action) => {
       const id = action.payload;
 
@@ -59,6 +62,10 @@ const cartSlice = createSlice({
 });
 
 export { getCartTotalQuantitySelector, actGetCatProdcutsByItems };
-export const { addToCart, cartItemChangeQuantity, cartRemoveItem } =
-  cartSlice.actions;
+export const {
+  addToCart,
+  cartItemChangeQuantity,
+  cartRemoveItem,
+  productsFullInfoCleanup,
+} = cartSlice.actions;
 export default cartSlice.reducer;

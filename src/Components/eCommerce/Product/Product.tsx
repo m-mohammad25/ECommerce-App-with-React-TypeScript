@@ -20,9 +20,15 @@ const Product = memo(
 
     const [isBtnClicked, setIsBtnClicked] = useState(0);
     const [isBtnDisabled, setIsBtnDisabled] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const LikeToggleHandler = (id: number) => {
-      dispatch(actLikeToggle(id));
+      if (isLoading) return;
+      setIsLoading(true);
+      dispatch(actLikeToggle(id))
+        .unwrap()
+        .then(() => setIsLoading(false))
+        .catch(() => setIsLoading(false));
     };
 
     useEffect(() => {
@@ -40,7 +46,13 @@ const Product = memo(
     return (
       <div className={product}>
         <div className={whishlistBtn} onClick={() => LikeToggleHandler(id)}>
-          {isLiked ? <LikeFill /> : <Like />}
+          {isLoading ? (
+            <Spinner size="sm" variant="primary" animation="border" />
+          ) : isLiked ? (
+            <LikeFill />
+          ) : (
+            <Like />
+          )}
         </div>
         <div className={productImg}>
           <img src={img} alt={title} />
