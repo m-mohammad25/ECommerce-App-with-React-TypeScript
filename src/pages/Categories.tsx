@@ -28,7 +28,7 @@ const Categories = () => {
 
   return (
     <Container>
-      <Heading>Categories</Heading>
+      <Heading title="Categories" />
       <Loading status={loading} error={error}>
         <GridList
           records={records}

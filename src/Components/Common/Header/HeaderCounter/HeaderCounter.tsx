@@ -1,18 +1,22 @@
-import { useEffect, useState } from "react";
-
-import { getCartTotalQuantitySelector } from "@store/Cart/cartSlice";
-import { useAppSelector } from "@store/hooks";
+import React, { useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import Logo from "../../../assets/cart.svg?react";
 import styles from "./styles.module.css";
 
 const { container, totalNum, pumpAnimate, iconWrapper } = styles;
-
-function HeaderBasket() {
-  const totalQuantity = useAppSelector(getCartTotalQuantitySelector);
-
+type THeaderCounterProps = {
+  totalQuantity: number;
+  title: string;
+  to: string;
+  svgIcon: React.ReactElement;
+};
+function HeaderCounter({
+  totalQuantity,
+  title,
+  to,
+  svgIcon,
+}: THeaderCounterProps) {
   const navigate = useNavigate();
 
   const [isAnimate, setIsAnimate] = useState(false);
@@ -27,14 +31,14 @@ function HeaderBasket() {
   }, [totalQuantity]);
 
   return (
-    <div className={container} onClick={() => navigate("/cart")}>
+    <div className={container} onClick={() => navigate(to)}>
       <div className={iconWrapper}>
-        <Logo title="basket icon" />
+        {svgIcon}
         <div className={quantityStyle}>{totalQuantity}</div>
       </div>
-      <h3>Cart</h3>
+      <h3>{title}</h3>
     </div>
   );
 }
 
-export default HeaderBasket;
+export default HeaderCounter;

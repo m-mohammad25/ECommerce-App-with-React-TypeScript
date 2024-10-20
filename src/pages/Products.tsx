@@ -33,7 +33,7 @@ const Products = () => {
 
   return (
     <Container>
-      <Heading>{prefix?.toLocaleUpperCase()} Products</Heading>
+      <Heading title={`${prefix?.toLocaleUpperCase()} Products`} />
       <Loading status={loading} error={error}>
         <>
           {

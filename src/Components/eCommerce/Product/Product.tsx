@@ -14,7 +14,6 @@ const { product, productImg, maximumNotice, whishlistBtn } = styles;
 const Product = memo(
   ({ id, title, img, price, max, quantity, isLiked }: TProduct) => {
     const dispatch = useAppDispatch();
-
     const availableQuantity = max - (quantity ?? 0);
     const isMaxQuantityReached = availableQuantity == 0;
 
@@ -39,10 +38,12 @@ const Product = memo(
       }, 300);
       return () => clearTimeout(debounce);
     }, [isBtnClicked]);
+
     const addToCartHandler = () => {
       dispatch(addToCart(id));
       setIsBtnClicked((prev) => prev + 1);
     };
+
     return (
       <div className={product}>
         <div className={whishlistBtn} onClick={() => LikeToggleHandler(id)}>

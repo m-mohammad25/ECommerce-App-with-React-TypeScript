@@ -1,9 +1,9 @@
 import { Badge, Container, Nav, Navbar } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import styles from "./styles.module.css";
-import { HeaderBasket } from "../../eCommerce";
-import { HeaderWishlist } from "../../eCommerce";
-const { headerContainer, headerLogo, headerRightBar } = styles;
+import HeaderRightBar from "./HeaderRightBar/HeaderRightBar";
+
+const { headerContainer, headerLogo } = styles;
 function Header() {
   return (
     <header className="header">
@@ -11,10 +11,7 @@ function Header() {
         <h1 className={headerLogo}>
           <span>Our</span> <Badge bg="info">Ecom</Badge>
         </h1>
-        <div className={headerRightBar}>
-          <HeaderWishlist />
-          <HeaderBasket />
-        </div>
+        <HeaderRightBar />
       </div>
       <Navbar
         expand="lg"
