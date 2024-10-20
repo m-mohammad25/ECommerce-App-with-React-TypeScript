@@ -1,5 +1,8 @@
 import { useEffect } from "react";
-import { actGetCategories } from "@store/categories/categoriesSlice";
+import {
+  actGetCategories,
+  cleanUpCategoriesRecords,
+} from "@store/categories/categoriesSlice";
 import { useAppDispatch, useAppSelector } from "@store/hooks";
 import { Container } from "react-bootstrap";
 import { Category } from "@components/eCommerce";
@@ -18,6 +21,9 @@ const Categories = () => {
       //if categories state is empty, fetch all records
       dispatch(actGetCategories());
     }
+    return () => {
+      dispatch(cleanUpCategoriesRecords());
+    };
   }, []);
 
   return (
