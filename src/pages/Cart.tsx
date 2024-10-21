@@ -1,48 +1,11 @@
-import { useCallback, useEffect } from "react";
-
-import { useAppDispatch, useAppSelector } from "@store/hooks";
-import {
-  actGetCatProdcutsByItems,
-  productsFullInfoCleanup,
-} from "@store/Cart/cartSlice";
-import { CartTotalPrice, CartItemList } from "@components/eCommerce";
-import { cartItemChangeQuantity, cartRemoveItem } from "@store/Cart/cartSlice";
-
+import useCart from "@hooks/useCart";
 import { Heading } from "@components/Common";
 import { Loading } from "@components/feedback";
+import { CartTotalPrice, CartItemList } from "@components/eCommerce";
 
 function Cart() {
-  const dispatch = useAppDispatch();
-  const changeQuantityHandler = useCallback(
-    (id: number, quantity: number) => {
-      dispatch(cartItemChangeQuantity({ id, quantity }));
-    },
-    [dispatch]
-  );
-
-  const removeCartItem = useCallback(
-    (id: number) => {
-      dispatch(cartRemoveItem(id));
-    },
-    [dispatch]
-  );
-
-  const { items, loading, error, productsFullInfo } = useAppSelector(
-    (state) => state.cart
-  );
-
-  const products = productsFullInfo.map((product) => ({
-    ...product,
-    quantity: items[product.id],
-  }));
-
-  useEffect(() => {
-    dispatch(actGetCatProdcutsByItems());
-    return () => {
-      dispatch(productsFullInfoCleanup());
-    };
-  }, [dispatch]);
-
+  const { loading, error, products, changeQuantityHandler, removeCartItem } =
+    useCart();
   return (
     <>
       <Heading title="Cart" />

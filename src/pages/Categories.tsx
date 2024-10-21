@@ -1,31 +1,13 @@
-import { useEffect } from "react";
-import {
-  actGetCategories,
-  cleanUpCategoriesRecords,
-} from "@store/categories/categoriesSlice";
-import { useAppDispatch, useAppSelector } from "@store/hooks";
+import useCategories from "@hooks/useCategories";
 import { Container } from "react-bootstrap";
 import { Category } from "@components/eCommerce";
 import { Loading } from "@components/feedback";
 import GridList from "@components/Common/GridList/GridList";
-import { TCategory } from "@customTypes/category";
+// import { TCategory } from "@customTypes/category";
 import { Heading } from "@components/Common";
 
 const Categories = () => {
-  const dispatch = useAppDispatch();
-  const { records, loading, error } = useAppSelector(
-    (state) => state.categories
-  );
-  useEffect(() => {
-    if (!records.length) {
-      //if categories state is empty, fetch all records
-      dispatch(actGetCategories());
-    }
-    return () => {
-      dispatch(cleanUpCategoriesRecords());
-    };
-  }, []);
-
+  const { loading, error, records } = useCategories();
   return (
     <Container>
       <Heading title="Categories" />
