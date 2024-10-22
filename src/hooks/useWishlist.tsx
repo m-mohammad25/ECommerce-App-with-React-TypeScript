@@ -18,8 +18,9 @@ function useWishlist() {
   }));
 
   useEffect(() => {
-    dispatch(actGetWishlistItems());
+    const promise = dispatch(actGetWishlistItems());
     return () => {
+      promise.abort();
       dispatch(productsFullInfoCleanup());
     };
   }, [dispatch]);

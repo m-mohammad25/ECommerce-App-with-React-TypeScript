@@ -8,10 +8,11 @@ type TResponse = TProduct[];
 const actGetCatProdcuts = createAsyncThunk(
   "producs/actGetCatProdcuts",
   async (cat_prefix: string, thunkAPI) => {
-    const { rejectWithValue } = thunkAPI;
+    const { rejectWithValue, signal } = thunkAPI;
     try {
       const response = await axios.get<TResponse>(
-        `products?cat_prefix=${cat_prefix}`
+        `products?cat_prefix=${cat_prefix}`,
+        { signal }
       );
       return response.data;
     } catch (error) {

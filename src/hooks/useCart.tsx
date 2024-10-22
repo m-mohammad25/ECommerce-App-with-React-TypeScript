@@ -33,8 +33,9 @@ function useCart() {
   }));
 
   useEffect(() => {
-    dispatch(actGetCatProdcutsByItems());
+    const promise = dispatch(actGetCatProdcutsByItems());
     return () => {
+      promise.abort();
       dispatch(productsFullInfoCleanup());
     };
   }, [dispatch]);

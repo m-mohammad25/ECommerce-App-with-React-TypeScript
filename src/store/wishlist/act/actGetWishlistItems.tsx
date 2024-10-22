@@ -14,9 +14,12 @@ type TWishlistEntry = {
 const actGetWishlistItems = createAsyncThunk(
   "wishlist/actGetWishlistItems",
   async (_, thunkAPI) => {
-    const { rejectWithValue, fulfillWithValue } = thunkAPI;
+    const { rejectWithValue, fulfillWithValue, signal } = thunkAPI;
     try {
-      const response = await axios.get<TWishlistEntry[]>(`wishlist?userId=1`);
+      const response = await axios.get<TWishlistEntry[]>(`wishlist?userId=1`, {
+        signal,
+      }); //it's enough to abort the first request only
+
       if (response.data.length === 0) return fulfillWithValue([]);
 
       const concatenatedItemsId = response.data

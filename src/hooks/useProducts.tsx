@@ -19,9 +19,10 @@ function useProducts() {
   }));
 
   useEffect(() => {
-    dispatch(actGetCatProdcuts(prefix as string));
+    const promise = dispatch(actGetCatProdcuts(prefix as string));
 
     return () => {
+      promise.abort();
       dispatch(productsCleanUp());
     };
   }, [dispatch, prefix]);

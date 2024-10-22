@@ -1,7 +1,7 @@
 import { createRoot } from "react-dom/client";
 //redux
 import { Provider } from "react-redux";
-import { store, persistor } from "@store/index";
+import { store, persistor } from "@store";
 
 //axios
 import "./services/axios_config.js";
@@ -9,6 +9,7 @@ import "./services/axios_config.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import AppRouter from "@routes/AppRouter";
+
 import { PersistGate } from "redux-persist/integration/react";
 
 createRoot(document.getElementById("root")!).render(

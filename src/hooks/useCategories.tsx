@@ -11,11 +11,13 @@ function useCategories() {
     (state) => state.categories
   );
   useEffect(() => {
-    if (!records.length) {
-      //if categories state is empty, fetch all records
-      dispatch(actGetCategories());
+    if (records.length > 0) {
+      return;
     }
+    //if categories state is empty, fetch all records
+    const promise = dispatch(actGetCategories());
     return () => {
+      promise.abort();
       dispatch(cleanUpCategoriesRecords());
     };
   }, []);
