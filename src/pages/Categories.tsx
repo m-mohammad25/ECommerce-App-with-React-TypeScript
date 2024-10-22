@@ -3,7 +3,7 @@ import { Container } from "react-bootstrap";
 import { Category } from "@components/eCommerce";
 import { Loading } from "@components/feedback";
 import GridList from "@components/Common/GridList/GridList";
-// import { TCategory } from "@customTypes/category";
+// import { TCategory } from "@types/category";
 import { Heading } from "@components/Common";
 
 const Categories = () => {
