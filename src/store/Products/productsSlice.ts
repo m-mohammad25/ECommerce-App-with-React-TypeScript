@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import actGetCatProdcuts from "./act/actGetCatProdcuts";
-import { TLoading, TProduct } from "@types";
+import { isString, TLoading, TProduct } from "@types";
 
 interface IProductState {
   records: TProduct[]; //array of that object
@@ -34,7 +34,9 @@ const productsSlice = createSlice({
 
     builder.addCase(actGetCatProdcuts.rejected, (state, action) => {
       state.loading = "failed";
-      state.error = action.payload as string;
+      if (isString(action.payload)) {
+        state.error = action.payload;
+      }
     });
   },
 });

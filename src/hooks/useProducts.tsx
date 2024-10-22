@@ -31,7 +31,7 @@ function useProducts() {
     loading,
     error,
     productFullInfo,
-    prefix: prefix?.toLocaleLowerCase(),
+    prefix: prefix?.toLocaleUpperCase(),
   };
 }
 
