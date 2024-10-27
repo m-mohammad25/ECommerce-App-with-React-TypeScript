@@ -11,9 +11,9 @@ const Categories = lazy(() => import("@pages/Categories"));
 const AboutUs = lazy(() => import("@pages/AboutUs"));
 const Login = lazy(() => import("@pages/Login"));
 const Register = lazy(() => import("@pages/Register"));
-const Error = lazy(() => import("@pages/Error/Error"));
 const Cart = lazy(() => import("@pages/Cart"));
 const Wishlist = lazy(() => import("@pages/Wishlist"));
+import Error from "@pages/Error/Error";
 
 const router = createBrowserRouter([
   {
