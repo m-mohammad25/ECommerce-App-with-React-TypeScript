@@ -9,7 +9,7 @@ function Wishlist() {
   return (
     <>
       <Heading title="Your Wishlist" />
-      <Loading status={loading} error={error}>
+      <Loading status={loading} error={error} type="cart">
         <>
           {records.length > 0 ? (
             <GridList
