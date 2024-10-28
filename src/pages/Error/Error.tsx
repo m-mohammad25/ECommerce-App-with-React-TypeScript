@@ -5,10 +5,12 @@ import { Link } from "react-router-dom";
 function Error() {
   return (
     <Container>
-      <LottieHandler type="notFound" />
-      <Link to="/" replace={true}>
-        Back to home?!
-      </Link>
+      <div className="d-flex flex-column justify-items-center align-items-center">
+        <LottieHandler type="notFound" />
+        <Link to="/" replace={true}>
+          Back to home?!
+        </Link>
+      </div>
     </Container>
   );
 }

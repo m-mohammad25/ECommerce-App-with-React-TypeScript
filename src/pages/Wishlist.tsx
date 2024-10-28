@@ -11,14 +11,11 @@ function Wishlist() {
       <Heading title="Your Wishlist" />
       <Loading status={loading} error={error} type="cart">
         <>
-          {records.length > 0 ? (
-            <GridList
-              records={records}
-              renderItem={(record) => <Product {...record} />}
-            />
-          ) : (
-            "Your wishlist is empty"
-          )}
+          <GridList
+            emptyMessage="Your wishlist is empty"
+            records={records}
+            renderItem={(record) => <Product {...record} />}
+          />
         </>
       </Loading>
     </>

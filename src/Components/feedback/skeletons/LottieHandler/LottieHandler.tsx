@@ -17,16 +17,19 @@ type LottieHandlerProps = {
 };
 
 function LottieHandler({ message, type }: LottieHandlerProps) {
+  const messageStyle =
+    type === "error"
+      ? { fontSize: "19px", color: "red" }
+      : { fontSize: "19px", marginTop: "30px" };
+
   const lottieType = lottieAnimationTypes[type];
   return (
     <div
       className="d-flex flex-column align-items-center"
-      style={{ marginTop: "15%" }}
+      // style={{ marginTop: "15%" }}
     >
       <Lottie animationData={lottieType} style={{ width: "400px" }} />
-      {message && (
-        <h3 style={{ marginTop: "30px", fontSize: "19px" }}>{message}</h3>
-      )}
+      {message && <h3 style={messageStyle}>{message}</h3>}
     </div>
   );
 }
