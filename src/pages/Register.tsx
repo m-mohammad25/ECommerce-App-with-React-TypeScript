@@ -1,18 +1,23 @@
 import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  signUpFormValidationSchema,
+  singUpTypes,
+} from "@validations/signUpFormValidationSchema";
 import { Heading } from "@components/Common";
+import { Input } from "@components/Form";
 import { Form, Button, Row, Col } from "react-bootstrap";
 
-type TFormInputs = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
-
 function Register() {
-  const { register, handleSubmit } = useForm<TFormInputs>();
-  const onSubmit: SubmitHandler<TFormInputs> = (data) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<singUpTypes>({
+    resolver: zodResolver(signUpFormValidationSchema),
+    mode: "onBlur",
+  });
+  const onSubmit: SubmitHandler<singUpTypes> = (data) => {
     console.log(data);
   };
   return (
@@ -21,49 +26,40 @@ function Register() {
       <Row>
         <Col md={{ span: 6, offset: 3 }}>
           <Form className="mb-4" onSubmit={handleSubmit(onSubmit)}>
-            <Form.Group className="mb-3">
-              <Form.Label>First Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="First Name"
-                {...register("firstName")}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Last Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Last Name"
-                {...register("lastName")}
-              />
-            </Form.Group>
+            <Input
+              label="First Name"
+              name="firstName"
+              register={register}
+              error={errors.firstName?.message}
+            />
 
-            <Form.Group className="mb-3">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter email"
-                {...register("email")}
-              />
-            </Form.Group>
+            <Input
+              label="Last Name"
+              name="lastName"
+              register={register}
+              error={errors.lastName?.message}
+            />
 
-            <Form.Group className="mb-3">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Password"
-                {...register("password")}
-              />
-            </Form.Group>
+            <Input
+              label="Email address"
+              name="email"
+              register={register}
+              error={errors.email?.message}
+            />
 
-            <Form.Group className="mb-3">
-              <Form.Label>Confirm Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Confirm Password"
-                {...register("confirmPassword")}
-              />
-            </Form.Group>
+            <Input
+              label="Password"
+              name="password"
+              register={register}
+              error={errors.password?.message}
+            />
+
+            <Input
+              label="Confirm Password"
+              name="confirmPassword"
+              register={register}
+              error={errors.confirmPassword?.message}
+            />
 
             <Button variant="info" type="submit" style={{ color: "white" }}>
               Submit
