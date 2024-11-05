@@ -1,3 +1,5 @@
+import { useAppSelector, useAppDispatch } from "@store/hooks";
+import { actAuthRegister } from "@store/Auth/AuthSlice";
 import { useForm, SubmitHandler } from "react-hook-form";
 import useCheckEmailAvailability from "@hooks/useCheckEmailAvailability";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -7,9 +9,13 @@ import {
 } from "@validations/signUpFormValidationSchema";
 import { Heading } from "@components/Common";
 import { Input } from "@components/Form";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button, Row, Col, Spinner } from "react-bootstrap";
 
 function Register() {
+  const dispath = useAppDispatch();
+
+  const { error, loading } = useAppSelector((state) => state.auth);
+
   const {
     register,
     handleSubmit,
@@ -29,7 +35,8 @@ function Register() {
   } = useCheckEmailAvailability();
 
   const onSubmit: SubmitHandler<singUpTypes> = (data) => {
-    console.log(data);
+    const { firstName, lastName, email, password } = data;
+    dispath(actAuthRegister({ firstName, lastName, email, password }));
   };
 
   const emailOnBlurHandler = async (e: React.FocusEvent<HTMLInputElement>) => {
@@ -109,9 +116,25 @@ function Register() {
               error={errors.confirmPassword?.message}
             />
 
-            <Button variant="info" type="submit" style={{ color: "white" }}>
-              Submit
+            <Button
+              variant="info"
+              type="submit"
+              style={{ color: "white" }}
+              disabled={
+                emailAvailabilityStatus === "checking"
+                  ? true
+                  : false || loading === "pending"
+              }
+            >
+              {loading === "pending" ? (
+                <>
+                  <Spinner animation="border" size="sm" /> Loading...{" "}
+                </>
+              ) : (
+                "Submit"
+              )}
             </Button>
+            <p style={{ color: "#DC3545", marginTop: "10px" }}>{error}</p>
           </Form>
         </Col>
       </Row>
