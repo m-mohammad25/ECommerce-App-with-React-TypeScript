@@ -1,4 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
+import useCheckEmailAvailability from "@hooks/useCheckEmailAvailability";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   signUpFormValidationSchema,
@@ -13,12 +14,39 @@ function Register() {
     register,
     handleSubmit,
     formState: { errors },
+    getFieldState,
+    trigger,
   } = useForm<singUpTypes>({
     resolver: zodResolver(signUpFormValidationSchema),
     mode: "onBlur",
   });
+
+  const {
+    emailAvailabilityStatus,
+    enteredEmail,
+    checkEmailAvailability,
+    resetCheckEmailAvailability,
+  } = useCheckEmailAvailability();
+
   const onSubmit: SubmitHandler<singUpTypes> = (data) => {
     console.log(data);
+  };
+
+  const emailOnBlurHandler = async (e: React.FocusEvent<HTMLInputElement>) => {
+    await trigger("email");
+    const { isDirty, invalid } = getFieldState("email"); //isDirty: means it's not blank. invalid means it doesn't match validation rules.
+    const value = e.target.value;
+
+    if (isDirty && !invalid && enteredEmail !== value) {
+      // checking
+      console.log(value, enteredEmail);
+      checkEmailAvailability(value);
+    }
+    if (isDirty && !invalid && enteredEmail) {
+      resetCheckEmailAvailability();
+    }
+
+    console.log(emailAvailabilityStatus);
   };
   return (
     <>
@@ -44,7 +72,27 @@ function Register() {
               label="Email address"
               name="email"
               register={register}
-              error={errors.email?.message}
+              onBlur={emailOnBlurHandler}
+              error={
+                errors.email?.message
+                  ? errors.email?.message
+                  : emailAvailabilityStatus === "notAvailable"
+                  ? "This email is already in use."
+                  : emailAvailabilityStatus === "failed"
+                  ? "Error from the server."
+                  : ""
+              }
+              success={
+                emailAvailabilityStatus === "available"
+                  ? "This email is available"
+                  : ""
+              }
+              checkingMsg={
+                emailAvailabilityStatus === "checking"
+                  ? "We're currently checking the availability of this email address. Please wait a moment."
+                  : ""
+              }
+              disabled={emailAvailabilityStatus === "checking" ? true : false}
             />
 
             <Input

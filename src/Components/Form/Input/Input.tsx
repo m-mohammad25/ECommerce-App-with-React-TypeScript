@@ -5,7 +5,11 @@ type InputProps<TFieldValue extends FieldValues> = {
   type?: string;
   name: Path<TFieldValue>;
   error?: string;
+  success?: string;
+  checkingMsg?: string;
+  disabled?: boolean;
   register: UseFormRegister<TFieldValue>;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 };
 
 function Input<TFieldValue extends FieldValues>({
@@ -14,7 +18,18 @@ function Input<TFieldValue extends FieldValues>({
   type = "text",
   register,
   error,
+  onBlur,
+  success,
+  checkingMsg,
+  disabled,
 }: InputProps<TFieldValue>) {
+  const onBlurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
+    if (onBlur) {
+      onBlur(e);
+    }
+    register(name).onBlur(e);
+  };
+
   return (
     <Form.Group className="mb-3">
       <Form.Label>{label}</Form.Label>
@@ -22,9 +37,13 @@ function Input<TFieldValue extends FieldValues>({
         type={type}
         placeholder={label}
         {...register(name)}
+        onBlur={onBlurHandler}
         isInvalid={!!error}
+        disabled={disabled}
       />
       <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
+      <Form.Control.Feedback type="valid">{success}</Form.Control.Feedback>
+      {checkingMsg && <Form.Text muted>{checkingMsg}</Form.Text>}
     </Form.Group>
   );
 }
