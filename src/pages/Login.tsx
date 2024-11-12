@@ -4,7 +4,7 @@ import { actAuthLogin, resetUI } from "@store/Auth/AuthSlice";
 import { Heading } from "@components/Common";
 import { Input } from "@components/Form";
 
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -20,7 +20,7 @@ import { useEffect } from "react";
 function Login() {
   const dispatch = useAppDispatch();
 
-  const { loading, error } = useAppSelector((state) => state.auth);
+  const { loading, error, accessToken } = useAppSelector((state) => state.auth);
 
   //destract message param from the url
   const [searchParams, setSearchParams] = useSearchParams();
@@ -45,6 +45,10 @@ function Login() {
         navigate("/");
       });
   };
+
+  if (accessToken) {
+    return <Navigate to="/" />;
+  }
 
   useEffect(() => {
     return () => {

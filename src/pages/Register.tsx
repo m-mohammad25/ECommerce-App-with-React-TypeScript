@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "@store/hooks";
 import { actAuthRegister, resetUI } from "@store/Auth/AuthSlice";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -17,7 +17,7 @@ function Register() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const { error, loading } = useAppSelector((state) => state.auth);
+  const { error, loading, accessToken } = useAppSelector((state) => state.auth);
 
   const {
     register,
@@ -61,6 +61,10 @@ function Register() {
       resetCheckEmailAvailability();
     }
   };
+
+  if (accessToken) {
+    return <Navigate to="/" />;
+  }
 
   useEffect(() => {
     return () => {
