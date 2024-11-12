@@ -7,7 +7,7 @@ const signInFormValidationSchema = z.object({
     .email({ message: "must be a valid email address" }),
   password: z
     .string()
-    .min(8, { message: "password must be 8 characters at least" }),
+    .min(1, { message: "password must be 8 characters at least" }),
 });
 
 type singInTypes = z.infer<typeof signInFormValidationSchema>;

@@ -1,5 +1,6 @@
+import { useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "@store/hooks";
-import { actAuthRegister } from "@store/Auth/AuthSlice";
+import { actAuthRegister, resetUI } from "@store/Auth/AuthSlice";
 import { useForm, SubmitHandler } from "react-hook-form";
 import useCheckEmailAvailability from "@hooks/useCheckEmailAvailability";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,9 +11,11 @@ import {
 import { Heading } from "@components/Common";
 import { Input } from "@components/Form";
 import { Form, Button, Row, Col, Spinner } from "react-bootstrap";
+import { useEffect } from "react";
 
 function Register() {
-  const dispath = useAppDispatch();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const { error, loading } = useAppSelector((state) => state.auth);
 
@@ -36,7 +39,14 @@ function Register() {
 
   const onSubmit: SubmitHandler<singUpTypes> = (data) => {
     const { firstName, lastName, email, password } = data;
-    dispath(actAuthRegister({ firstName, lastName, email, password }));
+    dispatch(actAuthRegister({ firstName, lastName, email, password }))
+      .unwrap()
+      .then(() => {
+        //redirect to login page
+        navigate(
+          "/login?message=Your account has been created successfully, please login"
+        );
+      });
   };
 
   const emailOnBlurHandler = async (e: React.FocusEvent<HTMLInputElement>) => {
@@ -45,16 +55,18 @@ function Register() {
     const value = e.target.value;
 
     if (isDirty && !invalid && enteredEmail !== value) {
-      // checking
-      console.log(value, enteredEmail);
       checkEmailAvailability(value);
     }
     if (isDirty && !invalid && enteredEmail) {
       resetCheckEmailAvailability();
     }
-
-    console.log(emailAvailabilityStatus);
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetUI());
+    };
+  }, []);
   return (
     <>
       <Heading title="User Registeration" />

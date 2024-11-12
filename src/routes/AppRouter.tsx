@@ -42,9 +42,9 @@ const router = createBrowserRouter([
       {
         index: true,
         element: (
-          <Suspense fallback="loading, please wait...">
+          <PageSuspenseLoadingFallback>
             <Home />
-          </Suspense>
+          </PageSuspenseLoadingFallback>
         ),
       },
       {
