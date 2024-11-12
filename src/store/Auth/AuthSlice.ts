@@ -28,6 +28,10 @@ const authSlice = createSlice({
     resetUI: (state) => {
       (state.error = null), (state.loading = "idle");
     },
+    logOut: (state) => {
+      state.user = null;
+      state.accessToken = null;
+    },
   },
   extraReducers: (builder) => {
     //register
@@ -67,5 +71,5 @@ const authSlice = createSlice({
 });
 
 export { actAuthRegister, actAuthLogin };
-export const { resetUI } = authSlice.actions;
+export const { resetUI, logOut } = authSlice.actions;
 export default authSlice.reducer;

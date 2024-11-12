@@ -1,10 +1,14 @@
-import { Badge, Container, Nav, Navbar } from "react-bootstrap";
+import { useAppDispatch, useAppSelector } from "@store/hooks";
+import { logOut } from "@store/Auth/AuthSlice";
+import { Badge, Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import styles from "./styles.module.css";
 import HeaderRightBar from "./HeaderRightBar/HeaderRightBar";
 
 const { headerContainer, headerLogo } = styles;
 function Header() {
+  const { user, accessToken } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
   return (
     <header className="header">
       <div className={headerContainer}>
@@ -35,12 +39,31 @@ function Header() {
               </Nav.Link>
             </Nav>
             <Nav>
-              <Nav.Link as={NavLink} to="login">
-                Login
-              </Nav.Link>
-              <Nav.Link as={NavLink} to="register">
-                Register
-              </Nav.Link>
+              {!accessToken ? (
+                <>
+                  <Nav.Link as={NavLink} to="login">
+                    Login
+                  </Nav.Link>
+                  <Nav.Link as={NavLink} to="register">
+                    Register
+                  </Nav.Link>
+                </>
+              ) : (
+                <>
+                  <NavDropdown title={`Welcome ${user?.firstName}!`}>
+                    <NavDropdown.Item>Profile</NavDropdown.Item>
+                    <NavDropdown.Item>Orders</NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item
+                      as={NavLink}
+                      to="/"
+                      onClick={() => dispatch(logOut())}
+                    >
+                      Logout
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>
