@@ -4,11 +4,19 @@ import { Badge, Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import styles from "./styles.module.css";
 import HeaderRightBar from "./HeaderRightBar/HeaderRightBar";
+import { actGetWishlistItems } from "@store/wishlist/wishlistSlice";
+import { useEffect } from "react";
 
 const { headerContainer, headerLogo } = styles;
 function Header() {
   const { user, accessToken } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (accessToken) {
+      dispatch(actGetWishlistItems("items"));
+    }
+  }, [dispatch, accessToken]);
+
   return (
     <header className="header">
       <div className={headerContainer}>

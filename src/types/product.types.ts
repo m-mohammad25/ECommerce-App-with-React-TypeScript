@@ -7,4 +7,5 @@ export interface TProduct {
   max: number;
   quantity?: number;
   isLiked?: boolean;
+  isAuthenticated?: boolean;
 }
