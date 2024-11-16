@@ -31,11 +31,13 @@ const whishListSlice = createSlice({
     builder.addCase(actLikeToggle.fulfilled, (state, action) => {
       state.error = null;
       if (action.payload.type === "add") {
-        state.items.push(action.payload.id);
+        state.items.push(action.payload.itemId);
       } else {
-        state.items = state.items.filter((item) => item !== action.payload.id);
+        state.items = state.items.filter(
+          (item) => item !== action.payload.itemId
+        );
         state.productsFullInfo = state.productsFullInfo.filter(
-          (product) => product.id !== action.payload.id
+          (product) => product.id !== action.payload.itemId
         );
       }
     });
@@ -53,6 +55,7 @@ const whishListSlice = createSlice({
     builder.addCase(actGetWishlistItems.fulfilled, (state, action) => {
       state.loading = "succeeded";
       state.error = null;
+
       if (action.payload?.dataType === "items") {
         state.items = action.payload.data as number[];
       } else if (action.payload?.dataType === "ProductsFullInfo") {

@@ -7,9 +7,10 @@ import { Button, Modal, Spinner } from "react-bootstrap";
 import Like from "@assets/like.svg?react";
 import LikeFill from "@assets/like-fill.svg?react";
 
-import styles from "./style.module.css";
+import styles from "./styles.module.css";
+import ProductInfo from "../ProductInfo/ProductInfo";
 
-const { product, productImg, maximumNotice, whishlistBtn } = styles;
+const { maximumNotice, whishlistBtn } = styles;
 
 const Product = memo(
   ({
@@ -37,8 +38,10 @@ const Product = memo(
         setShowModal(true);
         return;
       }
+
       if (isLoading) return;
       setIsLoading(true);
+
       dispatch(actLikeToggle(id))
         .unwrap()
         .then(() => setIsLoading(false))
@@ -70,7 +73,7 @@ const Product = memo(
           </Modal.Body>
         </Modal>
 
-        <div className={product}>
+        <ProductInfo title={title} img={img} price={price}>
           <div className={whishlistBtn} onClick={() => LikeToggleHandler(id)}>
             {isLoading ? (
               <Spinner size="sm" variant="primary" animation="border" />
@@ -80,11 +83,7 @@ const Product = memo(
               <Like />
             )}
           </div>
-          <div className={productImg}>
-            <img src={img} alt={title} />
-          </div>
-          <h2>{title}</h2>
-          <h3>{price.toFixed(2)} $</h3>
+
           <p className={maximumNotice}>
             {!isMaxQuantityReached
               ? `You can buy ${availableQuantity} item(s)`
@@ -104,7 +103,7 @@ const Product = memo(
               "Add to cart"
             )}
           </Button>
-        </div>
+        </ProductInfo>
       </>
     );
   }
