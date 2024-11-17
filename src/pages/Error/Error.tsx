@@ -7,6 +7,7 @@ function Error() {
     <Container>
       <div className="d-flex flex-column justify-items-center align-items-center">
         <LottieHandler type="notFound" />
+        <p>Page not found!</p>
         <Link to="/" replace={true}>
           Back to home?!
         </Link>

@@ -3,8 +3,8 @@
 This project is a e-commerce application built with React and TypeScript. It includes features such as product listing, product details, cart management, wishlist management, placing orders and user authentication.
 
 ![Categories Page](./src/assets/catalogue/CATEGORIES.jpeg)
-![Products Page](./src/assets/catalogue/PRODUCTS.jpeg.jpeg)
-![Cart Page](./src/assets/catalogue/CART.jpeg.jpeg)
+![Products Page](./src/assets/catalogue/PRODUCTS.jpeg)
+![Cart Page](./src/assets/catalogue/CART.jpeg)
 
 I have included many modern js packeges in this project:
 

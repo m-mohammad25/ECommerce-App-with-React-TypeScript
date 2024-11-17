@@ -23,118 +23,121 @@ import {
 //protected route
 import ProtectedRoute from "@components/Auth/ProtectedRoute";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
 
-    element: (
-      <Suspense
-        fallback={
-          <div style={{ marginTop: "10%" }}>
-            <LottieHandler
-              type="cartLoading"
-              message="Loading please wait..."
-            />
-          </div>
-        }
-      >
-        <MainLayout />
-      </Suspense>
-    ),
-    errorElement: <Error />,
-    children: [
-      {
-        index: true,
-        element: (
-          <PageSuspenseLoadingFallback>
-            <Home />
-          </PageSuspenseLoadingFallback>
-        ),
-      },
-      {
-        path: "/categories/products/:prefix",
-        element: (
-          <PageSuspenseLoadingFallback>
-            <Products />
-          </PageSuspenseLoadingFallback>
-        ),
-
-        loader: ({ params }) => {
-          if (
-            typeof params.prefix !== "string" ||
-            !/^[a-z]+$/i.test(params.prefix)
-          ) {
-            throw new Response("Bad Request", {
-              status: 400,
-              statusText: "Category not found",
-            });
+      element: (
+        <Suspense
+          fallback={
+            <div style={{ marginTop: "10%" }}>
+              <LottieHandler
+                type="cartLoading"
+                message="Loading please wait..."
+              />
+            </div>
           }
-          return true;
+        >
+          <MainLayout />
+        </Suspense>
+      ),
+      errorElement: <Error />,
+      children: [
+        {
+          index: true,
+          element: (
+            <PageSuspenseLoadingFallback>
+              <Home />
+            </PageSuspenseLoadingFallback>
+          ),
         },
-      },
-      {
-        path: "categories",
-        element: (
-          <PageSuspenseLoadingFallback>
-            <Categories />
-          </PageSuspenseLoadingFallback>
-        ),
-      },
-      {
-        path: "/cart",
-        element: (
-          <PageSuspenseLoadingFallback>
-            <Cart />
-          </PageSuspenseLoadingFallback>
-        ),
-      },
-      {
-        path: "/wishlist",
-        element: (
-          <ProtectedRoute>
+        {
+          path: "/categories/products/:prefix",
+          element: (
             <PageSuspenseLoadingFallback>
-              <Wishlist />
+              <Products />
             </PageSuspenseLoadingFallback>
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "about-us",
-        element: (
-          <PageSuspenseLoadingFallback>
-            <AboutUs />
-          </PageSuspenseLoadingFallback>
-        ),
-      },
-      {
-        path: "login",
-        element: (
-          <PageSuspenseLoadingFallback>
-            <Login />
-          </PageSuspenseLoadingFallback>
-        ),
-      },
-      {
-        path: "register",
-        element: (
-          <PageSuspenseLoadingFallback>
-            <Register />
-          </PageSuspenseLoadingFallback>
-        ),
-      },
-      {
-        path: "profile",
-        element: (
-          <ProtectedRoute>
+          ),
+
+          loader: ({ params }) => {
+            if (
+              typeof params.prefix !== "string" ||
+              !/^[a-z]+$/i.test(params.prefix)
+            ) {
+              throw new Response("Bad Request", {
+                status: 400,
+                statusText: "Category not found",
+              });
+            }
+            return true;
+          },
+        },
+        {
+          path: "categories",
+          element: (
             <PageSuspenseLoadingFallback>
-              <Profile />
+              <Categories />
             </PageSuspenseLoadingFallback>
-          </ProtectedRoute>
-        ),
-      },
-    ],
-  },
-]);
+          ),
+        },
+        {
+          path: "/cart",
+          element: (
+            <PageSuspenseLoadingFallback>
+              <Cart />
+            </PageSuspenseLoadingFallback>
+          ),
+        },
+        {
+          path: "/wishlist",
+          element: (
+            <ProtectedRoute>
+              <PageSuspenseLoadingFallback>
+                <Wishlist />
+              </PageSuspenseLoadingFallback>
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "about-us",
+          element: (
+            <PageSuspenseLoadingFallback>
+              <AboutUs />
+            </PageSuspenseLoadingFallback>
+          ),
+        },
+        {
+          path: "login",
+          element: (
+            <PageSuspenseLoadingFallback>
+              <Login />
+            </PageSuspenseLoadingFallback>
+          ),
+        },
+        {
+          path: "register",
+          element: (
+            <PageSuspenseLoadingFallback>
+              <Register />
+            </PageSuspenseLoadingFallback>
+          ),
+        },
+        {
+          path: "profile",
+          element: (
+            <ProtectedRoute>
+              <PageSuspenseLoadingFallback>
+                <Profile />
+              </PageSuspenseLoadingFallback>
+            </ProtectedRoute>
+          ),
+        },
+      ],
+    },
+  ],
+  { basename: "/ECommerce-App-with-React-TypeScript" }
+);
 
 function AppRouter() {
   return <RouterProvider router={router} />;
