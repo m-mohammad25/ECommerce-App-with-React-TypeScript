@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "@store/hooks";
 import { actAuthRegister, resetUI } from "@store/Auth/AuthSlice";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -10,6 +10,7 @@ import {
   signUpFormValidationSchema,
   singUpTypes,
 } from "@validations/signUpFormValidationSchema";
+
 function useRegister() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -60,7 +61,7 @@ function useRegister() {
   };
 
   if (accessToken) {
-    return <Navigate to="/" />;
+    navigate("/");
   }
 
   useEffect(() => {
