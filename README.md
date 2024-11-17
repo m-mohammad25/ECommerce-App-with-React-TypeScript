@@ -14,3 +14,6 @@ I have included many modern js packeges in this project:
 - **React-hook-form** and **Zod** for validating form
 - **Redux ToolKit** for managing the app state
 - **React Router** for managing navigation
+- **Json-server** for making a fake API
+
+You watch a live version of this project by clicking [here](https://m-mohammad25.github.io/ECommerce-App-with-React-TypeScript/)
