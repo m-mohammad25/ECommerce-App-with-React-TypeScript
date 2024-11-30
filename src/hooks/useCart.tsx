@@ -9,6 +9,7 @@ import { cartItemChangeQuantity, cartRemoveItem } from "@store/Cart/cartSlice";
 
 function useCart() {
   const dispatch = useAppDispatch();
+  const userAccessToken = useAppSelector((state) => state.auth.accessToken);
   const changeQuantityHandler = useCallback(
     (id: number, quantity: number) => {
       dispatch(cartItemChangeQuantity({ id, quantity }));
@@ -40,7 +41,14 @@ function useCart() {
     };
   }, [dispatch]);
 
-  return { loading, error, products, changeQuantityHandler, removeCartItem };
+  return {
+    loading,
+    error,
+    products,
+    changeQuantityHandler,
+    userAccessToken,
+    removeCartItem,
+  };
 }
 
 export default useCart;

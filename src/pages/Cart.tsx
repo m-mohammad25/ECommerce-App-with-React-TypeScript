@@ -4,8 +4,14 @@ import { Loading, LottieHandler } from "@components/feedback";
 import { CartTotalPrice, CartItemList } from "@components/eCommerce";
 
 function Cart() {
-  const { loading, error, products, changeQuantityHandler, removeCartItem } =
-    useCart();
+  const {
+    loading,
+    error,
+    products,
+    changeQuantityHandler,
+    removeCartItem,
+    userAccessToken,
+  } = useCart();
   return (
     <>
       <Heading title="Cart" />
@@ -17,7 +23,10 @@ function Cart() {
               changeQuantityHandler={changeQuantityHandler}
               removeCartItem={removeCartItem}
             />
-            <CartTotalPrice products={products} />
+            <CartTotalPrice
+              products={products}
+              userAccessToken={userAccessToken}
+            />
           </>
         ) : (
           <LottieHandler type="emptyCart" message="Your cart is empty" />
