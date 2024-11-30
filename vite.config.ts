@@ -4,7 +4,6 @@ import svgr from "vite-plugin-svgr";
 import path from "path";
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/ECommerce-App-with-React-TypeScript/",
   resolve: {
     alias: {
       "@assets": path.resolve(__dirname, "src/assets"),
