@@ -29,6 +29,7 @@ const productsSlice = createSlice({
     });
     builder.addCase(actGetCatProdcuts.fulfilled, (state, action) => {
       state.loading = "succeeded";
+      state.error = null;
       state.records = action.payload;
     });
 
