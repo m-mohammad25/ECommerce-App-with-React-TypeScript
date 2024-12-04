@@ -3,6 +3,9 @@ import { lazy, Suspense } from "react";
 
 // layouts
 const MainLayout = lazy(() => import("@layouts/MainLayout/MainLayout"));
+const ProfileLayout = lazy(
+  () => import("@layouts/ProfileLayout/ProfileLayout")
+);
 
 // pages
 const Home = lazy(() => import("@pages/Home"));
@@ -13,7 +16,9 @@ const Login = lazy(() => import("@pages/Login"));
 const Register = lazy(() => import("@pages/Register"));
 const Cart = lazy(() => import("@pages/Cart"));
 const Wishlist = lazy(() => import("@pages/Wishlist"));
-const Profile = lazy(() => import("@pages/Profile"));
+const Account = lazy(() => import("@pages/Account"));
+const Orders = lazy(() => import("@pages/Orders"));
+
 import Error from "@pages/Error/Error";
 import {
   LottieHandler,
@@ -127,10 +132,28 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <PageSuspenseLoadingFallback>
-              <Profile />
+              <ProfileLayout />
             </PageSuspenseLoadingFallback>
           </ProtectedRoute>
         ),
+        children: [
+          {
+            index: true,
+            element: (
+              <PageSuspenseLoadingFallback>
+                <Account />
+              </PageSuspenseLoadingFallback>
+            ),
+          },
+          {
+            path: "orders",
+            element: (
+              <PageSuspenseLoadingFallback>
+                <Orders />
+              </PageSuspenseLoadingFallback>
+            ),
+          },
+        ],
       },
     ],
   },

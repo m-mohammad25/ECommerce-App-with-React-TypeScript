@@ -4,12 +4,14 @@ import notFound from "@assets/lottieFiles/notFound.json";
 import error from "@assets/lottieFiles/error.json";
 import cartLoading from "@assets/lottieFiles/cartLoading.json";
 import emptyCart from "@assets/lottieFiles/emptyCart.json";
+import success from "@assets/lottieFiles/success.json";
 
 const lottieAnimationTypes = {
   notFound,
   error,
   cartLoading,
   emptyCart,
+  success,
 };
 type LottieHandlerProps = {
   type: keyof typeof lottieAnimationTypes;

@@ -6,10 +6,13 @@ import {
   productsFullInfoCleanup,
 } from "@store/Cart/cartSlice";
 import { cartItemChangeQuantity, cartRemoveItem } from "@store/Cart/cartSlice";
+import { cleanUpOrdersLoading } from "@store/orders/ordersSlice";
 
 function useCart() {
   const dispatch = useAppDispatch();
   const userAccessToken = useAppSelector((state) => state.auth.accessToken);
+  const ordersLoadingStatus = useAppSelector((state) => state.orders.loading);
+
   const changeQuantityHandler = useCallback(
     (id: number, quantity: number) => {
       dispatch(cartItemChangeQuantity({ id, quantity }));
@@ -38,6 +41,7 @@ function useCart() {
     return () => {
       promise.abort();
       dispatch(productsFullInfoCleanup());
+      dispatch(cleanUpOrdersLoading());
     };
   }, [dispatch]);
 
@@ -47,6 +51,7 @@ function useCart() {
     products,
     changeQuantityHandler,
     userAccessToken,
+    ordersLoadingStatus,
     removeCartItem,
   };
 }

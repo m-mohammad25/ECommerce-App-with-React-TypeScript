@@ -10,6 +10,7 @@ function Cart() {
     products,
     changeQuantityHandler,
     removeCartItem,
+    ordersLoadingStatus,
     userAccessToken,
   } = useCart();
   return (
@@ -28,6 +29,11 @@ function Cart() {
               userAccessToken={userAccessToken}
             />
           </>
+        ) : ordersLoadingStatus === "succeeded" ? (
+          <LottieHandler
+            type="success"
+            message="Your order has been placed successfully!"
+          />
         ) : (
           <LottieHandler type="emptyCart" message="Your cart is empty" />
         )}

@@ -2,7 +2,7 @@ import { TLoading } from "@types";
 import CategorySkeleton from "../skeletons/CategorySkeleton/CategorySkeleton";
 import ProductSkeleton from "../skeletons/ProductsSkeleton/ProductsSkeleton";
 import CartSkeleton from "../skeletons/ProductsSkeleton/CartSkeleton";
-import LottieHandler from "../skeletons/LottieHandler/LottieHandler";
+import LottieHandler from "../LottieHandler/LottieHandler";
 
 const skeletonTypes = {
   category: CategorySkeleton,

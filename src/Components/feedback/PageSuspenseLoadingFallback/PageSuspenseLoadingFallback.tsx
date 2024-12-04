@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import LottieHandler from "../skeletons/LottieHandler/LottieHandler";
+import LottieHandler from "../LottieHandler/LottieHandler";
 
 function PageSuspenseLoadingFallback({
   children,
