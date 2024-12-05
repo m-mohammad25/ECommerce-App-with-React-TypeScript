@@ -8,7 +8,7 @@ const actPlaceOrder = createAsyncThunk(
   async (total: number, thunk) => {
     const { rejectWithValue, getState } = thunk;
     const { auth, cart } = getState() as RootState;
-    const orderList = cart.productsFullInfo.map((el) => ({
+    const orderedItems = cart.productsFullInfo.map((el) => ({
       id: el.id,
       title: el.title,
       price: el.price,
@@ -20,7 +20,7 @@ const actPlaceOrder = createAsyncThunk(
       const response = await axios.post("/orders", {
         userId: auth.user?.id,
         total,
-        orderList,
+        items: orderedItems,
       });
       return response.data;
     } catch (error) {

@@ -4,9 +4,10 @@ type productInfoProps = {
   title: string;
   price: number;
   img: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   direction?: "row" | "column";
   style?: React.CSSProperties;
+  quantity?: number;
 };
 
 function ProductInfo({
@@ -14,6 +15,7 @@ function ProductInfo({
   price,
   img,
   children,
+  quantity,
   direction = "row",
   style,
 }: productInfoProps) {
@@ -26,6 +28,8 @@ function ProductInfo({
         <div className={`${styles[`productInfo-${direction}`]}`}>
           <h2>{title}</h2>
           <h3>{price.toFixed(2)} $</h3>
+          {quantity && <h3> Quantity: {quantity}</h3>}
+          {quantity && <h3>Total Quantity: {(quantity * price).toFixed(2)}</h3>}
           {children}
         </div>
       </div>

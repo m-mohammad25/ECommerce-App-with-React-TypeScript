@@ -3,5 +3,12 @@ import Category from "./Category/Category";
 import CartItem from "./CartItem/CartItem";
 import CartTotalPrice from "./CartTotalPrice/CartTotalPrice";
 import CartItemList from "./CartItemList/CartItemsList";
-
-export { Product, Category, CartItem, CartTotalPrice, CartItemList };
+import ProductInfo from "./ProductInfo/ProductInfo";
+export {
+  Product,
+  Category,
+  CartItem,
+  CartTotalPrice,
+  CartItemList,
+  ProductInfo,
+};
