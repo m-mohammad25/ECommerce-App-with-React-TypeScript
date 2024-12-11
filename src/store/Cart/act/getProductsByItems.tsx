@@ -19,7 +19,7 @@ const actGetCatProdcutsByItems = createAsyncThunk(
     try {
       const concatenatedItemsId = itemsId.map((el) => `id=${el}`).join("&");
       const response = await axios.get<TResponse>(
-        `http://localhost:5005/products?${concatenatedItemsId}`,
+        `products?${concatenatedItemsId}`,
         { signal }
       );
       return response.data;
