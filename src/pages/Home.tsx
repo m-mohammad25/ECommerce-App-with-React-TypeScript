@@ -1,5 +1,19 @@
+import { Landing } from "@components/Common";
+import { Collections } from "@components/Common";
+import { Col, Row } from "react-bootstrap";
+
 function Home() {
-  return <div className="home">Home</div>;
+  return (
+    <>
+      <Row>
+        <Col>
+          <Landing />
+        </Col>
+      </Row>
+
+      <Collections />
+    </>
+  );
 }
 
 export default Home;

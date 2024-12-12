@@ -1,0 +1,13 @@
+.social_icons {
+  display: flex;
+  width: 170px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.social_icons a {
+  text-decoration: none;
+  color: var(--light-black);
+  /* margin-right: 15px; */
+  font-size: 18px;
+}
