@@ -1,14 +1,14 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useState } from "react";
 import { useAppDispatch } from "@store/hooks";
-import { addToCart } from "@store/Cart/cartSlice";
 import { actLikeToggle } from "@store/wishlist/wishlistSlice";
 import { TProduct } from "@types";
-import { Button, Modal, Spinner } from "react-bootstrap";
+import { Modal, Spinner } from "react-bootstrap";
 import Like from "@assets/like.svg?react";
 import LikeFill from "@assets/like-fill.svg?react";
 
 import styles from "./styles.module.css";
 import ProductInfo from "../ProductInfo/ProductInfo";
+import AddToCartBtn from "./AddToCartBtn/AddToCartBtn";
 
 const { maximumNotice, whishlistBtn } = styles;
 
@@ -29,8 +29,6 @@ const Product = memo(
 
     const [showModal, setShowModal] = useState(false);
 
-    const [isBtnClicked, setIsBtnClicked] = useState(0);
-    const [isBtnDisabled, setIsBtnDisabled] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
     const LikeToggleHandler = (id: number) => {
@@ -46,20 +44,6 @@ const Product = memo(
         .unwrap()
         .then(() => setIsLoading(false))
         .catch(() => setIsLoading(false));
-    };
-
-    useEffect(() => {
-      if (!isBtnClicked) return;
-      setIsBtnDisabled(true);
-      const debounce = setTimeout(() => {
-        setIsBtnDisabled(false);
-      }, 300);
-      return () => clearTimeout(debounce);
-    }, [isBtnClicked]);
-
-    const addToCartHandler = () => {
-      dispatch(addToCart(id));
-      setIsBtnClicked((prev) => prev + 1);
     };
 
     return (
@@ -89,20 +73,8 @@ const Product = memo(
               ? `You can buy ${availableQuantity} item(s)`
               : "Max quantity reached"}
           </p>
-          <Button
-            variant="info"
-            style={{ color: "white" }}
-            onClick={addToCartHandler}
-            disabled={isBtnDisabled || isMaxQuantityReached}
-          >
-            {isBtnDisabled ? (
-              <>
-                <Spinner animation="border" size="sm" /> Loading...{" "}
-              </>
-            ) : (
-              "Add to cart"
-            )}
-          </Button>
+
+          <AddToCartBtn productId={id} isDisabled={isMaxQuantityReached} />
         </ProductInfo>
       </>
     );
