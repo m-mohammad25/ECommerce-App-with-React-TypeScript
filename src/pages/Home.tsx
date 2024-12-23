@@ -1,5 +1,6 @@
 import { Landing } from "@components/Common";
 import { Collections } from "@components/Common";
+import ProductsSlider from "@components/eCommerce/ProductsSlider/ProductsSlider";
 import { Col, Row } from "react-bootstrap";
 
 function Home() {
@@ -10,8 +11,8 @@ function Home() {
           <Landing />
         </Col>
       </Row>
-
       <Collections />
+      <ProductsSlider />
     </>
   );
 }
