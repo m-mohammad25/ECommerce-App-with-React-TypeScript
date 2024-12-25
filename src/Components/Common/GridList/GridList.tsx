@@ -17,8 +17,10 @@ function GridList<T extends THasID>({
     records.length > 0 ? (
       records.map((record) => (
         <Col
-          xs={6}
-          md={3}
+          xs={12}
+          sm={6}
+          md={4}
+          lg={3}
           className="d-flex justify-content-center mb-5 mt-2"
           key={record.id}
         >
