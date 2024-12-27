@@ -11,7 +11,10 @@ function Landing() {
     <section id="home">
       <div className="home_page ">
         <div className="home_img">
-          <img src="https://i.postimg.cc/t403yfn9/home2.jpg" alt="img " />
+          <img
+            src="https://images.pexels.com/photos/845434/pexels-photo-845434.jpeg"
+            alt="img "
+          />
         </div>
         <div className="home_txt ">
           <p className="collectio ">SUMMER COLLECTION</p>

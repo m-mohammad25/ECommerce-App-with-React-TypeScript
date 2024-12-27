@@ -11,7 +11,7 @@ const ProfileLayout = lazy(
 const Home = lazy(() => import("@pages/Home"));
 const Products = lazy(() => import("@pages/Products"));
 const Categories = lazy(() => import("@pages/Categories"));
-const AboutUs = lazy(() => import("@pages/AboutUs"));
+const AboutUs = lazy(() => import("@pages/AboutUs/AboutUs"));
 const Login = lazy(() => import("@pages/Login"));
 const Register = lazy(() => import("@pages/Register"));
 const Cart = lazy(() => import("@pages/Cart"));

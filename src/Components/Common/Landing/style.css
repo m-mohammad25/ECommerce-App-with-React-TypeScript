@@ -1,6 +1,6 @@
 :root {
   /* //....... Color ........// */
-  --primary-color: #0dcaf0;
+  --primary-color: #1fc2c1;
   --light-black: rgba(0, 0, 0, 0.89);
   --black: #000;
   --white: #fff;
@@ -40,12 +40,15 @@
   line-height: 53px;
   letter-spacing: 3px;
   font-weight: 600;
-  color: var(--light-black);
+  /* color: var(--light-black); */
+  color: #27272d;
 }
 
 .home_txt .home_label p {
-  color: grey;
-  font-size: 14px;
+  color: #b4052c;
+  /* font-weight: lighter; */
+  font-size: 16px;
+  font-family: sans-serif;
   padding-top: 10px;
 }
 
