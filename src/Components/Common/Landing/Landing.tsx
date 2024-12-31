@@ -17,7 +17,7 @@ function Landing() {
           />
         </div>
         <div className="home_txt ">
-          <p className="collectio ">SUMMER COLLECTION</p>
+          <p className="d-xl-none">FALL COLLECTION</p>
           <h2 className="d-none d-xl-block">
             FALL - WINTER
             <br />

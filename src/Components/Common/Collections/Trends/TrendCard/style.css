@@ -16,6 +16,11 @@
   padding: 25px;
 }
 
+.l-news .news-conte .date-news {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .l-news .news-conte .date-news p {
   color: var(--light-black);
   text-align: center;
@@ -36,6 +41,7 @@
   color: var(--primary-color);
   position: relative;
   font-weight: 600;
+  width: 100%;
 }
 
 .l-news .news-conte .date-news a::after {
