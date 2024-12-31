@@ -5,7 +5,7 @@ function AboutUs() {
     <section className="aboutUs ">
       <div className="script d-lg-block ">
         <h2>About Us</h2>
-        <p className="p-lg-0 pe-lg-2 mb-4 text-lg-start">
+        <p className="p-lg-0 pe-lg-2 text-lg-start">
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut nobis
           sequi modi ad quos atque recusandae, soluta laudantium. Nesciunt illo
           atque, nisi exercitationem corrupti ex. Suscipit voluptates reiciendis
