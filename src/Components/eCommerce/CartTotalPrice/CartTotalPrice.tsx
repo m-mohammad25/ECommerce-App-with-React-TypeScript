@@ -58,7 +58,7 @@ function CartTotalPrice({ products, userAccessToken }: TCartTotalPriceProps) {
         </Modal.Header>
         <Modal.Body>
           Are you sure you want to place order with Subtotal:{" "}
-          {totalPrice.toFixed(2)} EGP
+          {totalPrice.toFixed(2)}$
           {!loading && error && (
             <p style={{ color: "#DC3545", marginTop: "10px" }}>{error}</p>
           )}

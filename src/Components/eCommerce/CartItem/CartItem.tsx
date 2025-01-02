@@ -34,7 +34,7 @@ const CartItem = memo(
     };
     return (
       <div className={cartItem}>
-        <ProductInfo title={title} img={img} price={price} direction="column">
+        <ProductInfo title={title} img={img} price={price}>
           <Button
             variant="secondary"
             style={{ color: "white", width: "100px" }}
