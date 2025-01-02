@@ -21,7 +21,7 @@ function Header() {
     <header className="header">
       <div className={headerContainer}>
         <h1 className={headerLogo}>
-          <span>Our</span> <Badge bg="info">eCom</Badge>
+          <span>We</span> <Badge bg="info">eCom</Badge>
         </h1>
         <HeaderRightBar />
       </div>
