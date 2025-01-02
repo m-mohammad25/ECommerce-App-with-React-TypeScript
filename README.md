@@ -1,4 +1,4 @@
-# ECommerce App with React & TypeScript (in progress)
+# ECommerce App with React & TypeScript
 
 This project is a e-commerce application built with React and TypeScript. It includes features such as product listing, product details, cart management, wishlist management, placing orders and user authentication.
 
