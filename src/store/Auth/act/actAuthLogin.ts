@@ -7,15 +7,15 @@ type TFormDAta = {
   password: string;
 };
 
-type TResponse = {
-  accessToken: string;
-  user: {
-    id: number;
-    email: string;
-    firstName: string;
-    lastName: string;
-  };
-};
+// type TResponse = {
+//   accessToken: string;
+//   user: {
+//     id: number;
+//     email: string;
+//     firstName: string;
+//     lastName: string;
+//   };
+// };
 const actAuthLogin = createAsyncThunk(
   "auth/actAuthLogin",
   async (formData: TFormDAta, thunk) => {
