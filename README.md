@@ -19,3 +19,9 @@ I have included many modern js packeges in this project:
 - **Json-server** for making a fake API
 
 You watch a live version of this project by clicking [here](https://m-mohammad25.github.io/ECommerce-App-with-React-TypeScript/)
+
+You Can use the following credentials to login:
+email: h.potter@hogwarts.edu
+password: 12345@
+
+> **Note:** The live version uses **sample data** for demonstration purposes. Any changes made **will not** be preserved.
